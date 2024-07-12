@@ -29,6 +29,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
+import { StudentDetailsComponent } from './student-details/student-details.component';
+import { NewPaymentComponent } from './new-payment/new-payment.component';
+import {MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {PdfViewerModule} from "ng2-pdf-viewer";
+import {MatProgressSpinner, MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+import { AreaComponent } from './shared/widgets/area/area.component';
+import {HighchartsChartModule} from "highcharts-angular";
 
 @NgModule({
   declarations: [
@@ -41,7 +51,11 @@ import {MatSortModule} from "@angular/material/sort";
     PaymentsComponent,
     StudentsComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    StudentDetailsComponent,
+    NewPaymentComponent,
+    PaymentDetailsComponent,
+    AreaComponent
   ],
   imports: [
     BrowserModule,
@@ -61,10 +75,15 @@ import {MatSortModule} from "@angular/material/sort";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-
+    MatDatepickerModule, MatNativeDateModule, MatSelectModule,
+    PdfViewerModule, MatProgressSpinnerModule,
+    HighchartsChartModule
   ],
   providers: [
     provideAnimationsAsync(),AuthGuard,AuthorizationGuard
+  ],
+  exports:[
+    AreaComponent
   ],
   bootstrap: [AppComponent]
 })

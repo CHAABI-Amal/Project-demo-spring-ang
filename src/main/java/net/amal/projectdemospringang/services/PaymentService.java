@@ -1,5 +1,6 @@
 package net.amal.projectdemospringang.services;
 
+import net.amal.projectdemospringang.dtos.PaymentDTO;
 import net.amal.projectdemospringang.entities.Payment;
 import net.amal.projectdemospringang.entities.PaymentStatus;
 import net.amal.projectdemospringang.entities.PaymentType;
@@ -33,7 +34,7 @@ private PaymentRepository paymentRepository;
         this.paymentRepository = paymentRepository;
     }
 
-    public Payment savePayment(MultipartFile file, LocalDate date, double amount, PaymentType type, String studentCode) throws IOException {
+    public Payment savePayment(MultipartFile file, PaymentDTO paymentDTO) throws IOException {
         Path folderPath = Paths.get(System.getProperty("user.home"), "enset-data", "payments");
         if (!Files.exists(folderPath)) {
             Files.createDirectories(folderPath);
@@ -41,12 +42,15 @@ private PaymentRepository paymentRepository;
         String fileName = UUID.randomUUID().toString();
         Path filePath = Paths.get(System.getProperty("user.home"), "enset-data", "payments", fileName + ".pdf");
         Files.copy(file.getInputStream(), filePath);
-        Student student = studentRepository.findByCode(studentCode);
+        Student student = studentRepository.findByCode(paymentDTO.getStudentCode());
         Payment payment =Payment.builder()
-                .date(date).type(type).student(student)
-                .amount(amount)
-                .file(filePath.toUri().toString())
+                .date(paymentDTO.getDate())
+                .type(paymentDTO.getType())
                 .status(PaymentStatus.CREATED)
+                .student(student)
+                .amount(paymentDTO.getAmount())
+                .file(filePath.toUri().toString())
+
                 .build();
         return paymentRepository.save(payment);
     }

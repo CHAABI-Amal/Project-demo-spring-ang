@@ -37,8 +37,18 @@ public class ProjectDemoSpringAngApplication {
 					.firstName("Noha").code("123").programId("secondary")
 					.build());
 			studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-					.firstName("Ahmed").code("1234").programId("Primary")
+					.firstName("Amine").code("1234").programId("Primary")
 					.build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
+					.firstName("saif").code("12345").programId("Primary")
+					.build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
+					.firstName("mohammed").code("12346").programId("Primary")
+					.build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
+					.firstName("Ali").code("12347").programId("Primary")
+					.build());
+
 
 
 			PaymentType[] paymentTypes=PaymentType.values();
